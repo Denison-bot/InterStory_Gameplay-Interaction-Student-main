@@ -50,6 +50,14 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractObjScript.InfoMessage();
         }
+        else if (currentInteractObjScript.interType == InteractionObject.InteractableType.pickup)
+        {
+            currentInteractObjScript.PickUp();
+        }
+        else if (currentInteractObjScript.interType == InteractionObject.InteractableType.dialogue)
+        {
+            currentInteractObjScript.Dialogue();
+        }
     }
 
 }

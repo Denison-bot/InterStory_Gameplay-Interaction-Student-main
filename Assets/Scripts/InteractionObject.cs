@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InteractionObject : MonoBehaviour
 {
-
+    //public int delay;
 
     // Update is called once per frame
     void Update()
@@ -27,6 +27,10 @@ public class InteractionObject : MonoBehaviour
     public string infoMessage;
     private Text textInfo;
 
+    [Header("Dialogue Text")]
+    [TextArea]
+    public string[] sentances;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -41,5 +45,22 @@ public class InteractionObject : MonoBehaviour
     public void InfoMessage()
     {
         textInfo.text = infoMessage;
+        StartCoroutine(ShowInfo(infoMessage, 2.5f));
+    }
+    public void PickUp()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Dialogue()
+    {
+        GameObject.Find("DialogueManager").GetComponent<DialogueManager>().startDialogue(sentances);
+    }
+
+    IEnumerator ShowInfo(string message, float delay)
+    {
+        textInfo.text = message;
+        yield return new WaitForSeconds(delay);
+        textInfo.text = null;
     }
 }
